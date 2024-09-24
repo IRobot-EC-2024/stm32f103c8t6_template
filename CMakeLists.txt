@@ -11,6 +11,9 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
 
 
 # Define the build type
@@ -27,8 +30,8 @@ include("cmake/gcc-arm-none-eabi.cmake")
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-# Enable CMake support for ASM and C languages
-enable_language(C ASM)
+# Enable CMake support for ASM and C/C++ languages
+enable_language(C CXX ASM)
 
 # Core project settings
 project(${CMAKE_PROJECT_NAME})
@@ -67,11 +70,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     # Add user defined libraries
 )
 
-# Add openocd functions
-include(${CMAKE_SOURCE_DIR}/openocd/flash-target.cmake)
-
-# 调用 add_erase_and_reset 函数
-add_erase_and_reset()
-
-# 调用 flash_target 函数
-flash_target()
+# Add openocd util targets
+include(${CMAKE_SOURCE_DIR}/openocd/utils.cmake)
