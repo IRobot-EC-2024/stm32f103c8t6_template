@@ -4,7 +4,7 @@
       {
         "label": "Build",
         "type": "shell",
-        "command": "cmake --build build/Debug",
+        "command": "cmake --preset=Debug ; cmake --build build/Debug --target all",
         "args": [],
         "problemMatcher": "$gcc",
         "group": "build",
@@ -16,9 +16,9 @@
         "command": "openocd",
         "args": [
           "-f",
-          "${workspaceFolder}/openocd/openocd.cfg",
+          "./openocd/openocd.cfg",
           "-c",
-          "program ${workspaceFolder}/build/Debug/stm32f103c8t6_template.elf verify reset exit"
+          "program ./build/Debug/stm32f103c8t6_template.elf verify reset exit"
         ],
         "dependsOn": [
           "Build"
